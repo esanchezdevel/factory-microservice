@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Factory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        #message {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+            display: none; /* hidden initially */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cars Factory</h1>
+    <button id="createCarBtn">Create Car</button>
+    <div id="message">Car created successfully!</div>
+
+    <script>
+        const button = document.getElementById('createCarBtn');
+        const message = document.getElementById('message');
+
+        button.addEventListener('click', () => {
+            fetch('/api/cars', { // your backend endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ model: 'Model X', color: 'Red' }) // sample car data
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // assuming backend returns JSON
+            })
+            .then(data => {
+                // Show the success message
+                message.style.display = 'block';
+                
+                // Hide it after 3 seconds
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                message.textContent = 'Failed to create car!';
+                message.style.color = 'red';
+                message.style.display = 'block';
+                
+                setTimeout(() => {
+                    message.style.display = 'none';
+                    message.style.color = 'green';
+                    message.textContent = 'Car created successfully!';
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
