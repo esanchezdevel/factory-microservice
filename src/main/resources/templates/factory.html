@@ -33,12 +33,12 @@
         const message = document.getElementById('message');
 
         button.addEventListener('click', () => {
-            fetch('/api/cars', { // your backend endpoint
+            fetch('/api/cars', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ model: 'Model X', color: 'Red' }) // sample car data
+                //body: JSON.stringify({ model: 'Model X', color: 'Red' }) // sample car data
             })
             .then(response => {
                 if (!response.ok) {
