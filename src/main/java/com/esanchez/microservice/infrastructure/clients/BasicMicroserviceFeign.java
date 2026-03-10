@@ -2,15 +2,18 @@ package com.esanchez.microservice.infrastructure.clients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import feign.Body;
+import com.esanchez.microservice.infrastructure.clients.dto.CreateCarRequestDTO;
+import com.esanchez.microservice.infrastructure.clients.dto.CreateCarResponseDTO;
 
 @FeignClient(
 		name = "basic-microservice",
 		url = "${basic-microservice.url}",
-		configuration = FeignAuthInterceptor.class)
+		configuration = BasicFeignConfig.class
+		)
 public interface BasicMicroserviceFeign {
 
-	@PostMapping("/v1/api/cars")
-	CarDTO createCar(@Body CarDTO car);
+	@PostMapping(value = "/v1/api/cars", consumes = "application/json", produces = "application/json")
+	CreateCarResponseDTO createCar(@RequestBody CreateCarRequestDTO request);
 }
