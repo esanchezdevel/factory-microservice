@@ -35,7 +35,7 @@ public class FeignExecutorService {
 				
 				break;
 			} catch (FeignException e) {
-				logger.error("Error creating car: {}", e.getMessage());
+				logger.error("Error executing request: {}", e.getMessage());
 				
 				if (e.status() != HttpStatus.UNAUTHORIZED.value() || (e.status() == HttpStatus.UNAUTHORIZED.value()) && attempt == 1) {
 					throw new FactoryException(e.status(), e.getMessage());

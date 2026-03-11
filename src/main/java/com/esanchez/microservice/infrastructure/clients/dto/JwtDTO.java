@@ -1,6 +1,6 @@
 package com.esanchez.microservice.infrastructure.clients.dto;
 
-public class JwtDTO {
+public class JwtDTO extends BaseDTO {
 
 	private String token;
 

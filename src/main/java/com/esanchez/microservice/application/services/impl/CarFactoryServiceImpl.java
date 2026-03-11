@@ -40,5 +40,6 @@ public class CarFactoryServiceImpl implements CarFactoryService {
 		CreateCarResponseDTO response = feignExecutorService.execute(() -> basicMicroserviceFeign.createCar(request));
 		
 		logger.info("Response: {}", response);
+		
 	}
 }
