@@ -29,7 +29,7 @@ public class ApiController {
 		logger.info("Create new car request");
 		
 		try {
-			carFactoryService.createCar();
+			carFactoryService.createCar(false);
 			logger.info("Car created");
 			return ResponseEntity.ok(new ResponseDTO(ResponseStatus.SUCCESS.value()));
 		} catch (FactoryException e) {
